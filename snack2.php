@@ -6,11 +6,17 @@ if(isset($_GET['name']) && isset($_GET['age']) && isset($_GET['email'])){
        $age= $_GET['age'];
        $mail= $_GET['email'];
 
-       if(strlen($name)>3){
-        if (is_numeric($age)){
-            var_dump('ciao');
+       if(strlen($name)>3 && is_numeric($age) ){
+            if (strpos($mail, '@') && strpos($mail, '.')){
+            $response='Accesso riuscito';
+            }
+            else{
+                $response='Accesso negato';
+            }
         }
-       }
+        else{
+            $response='Accesso negato';
+        }
 }
  
 
@@ -31,5 +37,9 @@ if(isset($_GET['name']) && isset($_GET['age']) && isset($_GET['email'])){
         <input type="number" placeholder="inserisci la tua eta" name="age" id="age" required>
         <button  type="submit">Invia</button>
     </form>
+    <?php if(isset($response)){?>
+        <h5> <?php echo $response; ?></h5>
+        <?php } ?>  
+    
 </body>
 </html>
